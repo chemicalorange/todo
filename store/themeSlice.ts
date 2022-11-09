@@ -5,7 +5,7 @@ export interface TodosState {
 }
 
 const initialState: TodosState = {
-  mood: 'light'
+  mood: 'dark'
 }
 
 const themeSlice = createSlice({

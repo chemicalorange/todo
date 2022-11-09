@@ -24,7 +24,7 @@ const initialState: TodosState = {
       checked: false
     },
     '0004': {
-      id: '0003',
+      id: '0004',
       title: 'Coding',
       checked: false
     }
