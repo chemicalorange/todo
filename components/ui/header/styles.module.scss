@@ -1,0 +1,64 @@
+.wrapper {
+  background: url(./images/bg-dark.jpg);
+  background-size: cover;
+  padding: 40px 0;
+
+  &.light {
+    background-image: url(./images/bg-light.jpg);
+  }
+}
+
+.logo {
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: 10px;
+  color: white;
+  font-weight: 800;
+}
+
+.container {
+  display: grid;
+  gap: 20px;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    background: none;
+    outline: none;
+    border: none;
+  }
+}
+
+.input {
+  position: relative;
+  .add {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 23px;
+    right: 20px;
+  }
+  .add::before, .add::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 1px;
+    background: var(--color-text);
+    opacity: 0;
+  }
+  .add::after {
+    transform: rotate(-90deg);
+  }
+
+  .active::before, .active::after {
+    opacity: 1;
+  }
+}

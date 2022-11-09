@@ -1,0 +1,14 @@
+:root {
+  --color-bg: hsl(235, 21%, 11%);
+  --color-block: hsl(235, 24%, 19%);
+  --color-text: hsl(234, 39%, 85%);
+  --color-gray: hsla(233, 11%, 52%, 0.582);
+  --color-blue: hsl(220, 98%, 61%);
+}
+
+.light {
+  --color-bg: hsl(233, 11%, 84%);
+  --color-block: hsl(236, 33%, 92%);
+  --color-text: hsl(235, 21%, 11%);
+  color: var(--color-text);
+}
