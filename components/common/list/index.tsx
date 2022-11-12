@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { removeCompleted, reorderTodos } from 'store/todoSlice'
 import type { RootState } from 'store'
+import { EntitiesItem } from 'store/todoSlice'
 
 import { Container } from 'components/ui/container'
 import { ListItem } from 'components/ui/list-item'
@@ -15,7 +16,7 @@ import styles from './styles.module.scss'
 export const List = () => {
   const [filter, setFilter] = useState('all')
   const allTodos = useSelector((state: RootState) => Object.values(state.todos.entities))
-  const filteredTodos = useSelector((state: RootState) => {
+  const filteredTodos:EntitiesItem[] = useSelector((state: RootState) => {
     const todos = Object.values(state.todos.entities) 
     switch (filter) {
       case 'all':
@@ -27,13 +28,8 @@ export const List = () => {
     }
   }
   )
-  const [todos, setTodos] = useState(filteredTodos)
+  const unfinishedTodos = filteredTodos.filter((item) => item.checked === false)
 
-  useEffect(() => {
-    setTodos(filteredTodos)
-  }, [filter])
- 
-  const unfinishedTodos = todos.filter((item) => item.checked === false)
   const dispatch = useDispatch()
   return (
     <div className={styles.wrapper}>

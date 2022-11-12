@@ -1,9 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
+interface Entities {
+  [key: string]: EntitiesItem
+}
+
+export interface EntitiesItem {
+    id: string
+    title: string
+    checked: boolean
+}
+
 export interface TodosState {
-  entities: {}
-  ids: [string]
+  entities: Entities
+  ids: string[]
 }
 
 const initialState: TodosState = {
@@ -38,21 +48,22 @@ const todosSlice = createSlice({
   reducers: {
     addTodo: (state, action: PayloadAction<string>) => {
       const index = Date.now().toString()
-      let newTodo = {}
+      let newTodo:Entities = {}
       newTodo[index] = {id: index, title: action.payload, checked: false}
       state.ids.push(index)
       state.entities = {...newTodo, ...state.entities}
-      console.log({...newTodo, ...state.entities})
-      
     },
+
     removeTodo: (state, action: PayloadAction<string>) => {
       delete state.entities[action.payload]
-      state.ids = state.ids.map(id => id !== action.payload)
+      state.ids = state.ids.filter(id => id !== action.payload)
     },
+
     toggleCheck: (state, action: PayloadAction<string>) => {
       const checked = state.entities[action.payload].checked 
       state.entities[action.payload].checked = !checked
     },
+
     removeCompleted: (state) => {
       Object.entries(state.entities).map(([index, item]) => {
          if(item.checked) {
@@ -60,9 +71,10 @@ const todosSlice = createSlice({
          } 
       })
     },
-    reorderTodos: (state, action: PayloadAction<string>) => {
-      const newState = {}
-      action.payload.map(item => {
+    
+    reorderTodos: (state, action: PayloadAction<[]>) => {
+      const newState:Entities = {}
+      action.payload.map((item: EntitiesItem) => {
         newState[item.id] = item
       })
       state.entities = newState
